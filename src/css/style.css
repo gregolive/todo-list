@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap');
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.sidebar {
+  min-height: calc(100vh - 56px);
+}
+
+a {
+  color: #00BA91;
+}
+
+/* NAVBAR */
+
+.navbar-logo {
+  height: 24px;
+  width: auto;
+}
+
+.btn-toggle-nav a {
+    display: inline-flex;
+    padding: 0.1875rem 0.5rem;
+    margin-top: 0.125rem;
+    margin-left: 1.25rem;
+    text-decoration: none;
+}
