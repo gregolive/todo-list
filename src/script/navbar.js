@@ -24,6 +24,7 @@ const navbarMenu = () => {
 
   button.className = 'navbar-toggler';
   button.type = 'button';
+  button.setAttribute('data-bs-target', '#navbar');
   button.setAttribute('data-bs-toggle', 'collapse');
   button.appendChild(span);
 
@@ -50,6 +51,7 @@ const navbarLinks = () => {
   list.appendChild(item);
 
   linkDiv.className = 'collapse navbar-collapse';
+  linkDiv.id = 'navbar';
   linkDiv.appendChild(list);
 
   return linkDiv;

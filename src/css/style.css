@@ -1,20 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap');
 @import '~bootstrap-icons/font/bootstrap-icons';
 
+:root {
+  --primary-color: #00BA91;
+  --secondary-color: #04E492;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
 }
 
-.sidebar {
-  min-height: calc(100vh - 56px);
-}
-
 a {
-  color: #00BA91;
   cursor: pointer;
 }
 
 /* NAVBAR */
+
+nav {
+  padding: 8px 16px;
+}
 
 .navbar-logo {
   height: 24px;
@@ -27,4 +31,23 @@ a {
   margin-top: 0.125rem;
   margin-left: 1.25rem;
   text-decoration: none;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  min-height: calc(100vh - 56px);
+  width: 280px;
+}
+
+.btn-check:focus+.btn, .btn:focus {
+  box-shadow: 0 0 0 0.25rem rgba(4, 228, 146, 0.25);
+}
+
+a.link-info {
+  color: var(--primary-color);
+}
+
+a.link-info:hover {
+  color: var(--secondary-color);
 }
