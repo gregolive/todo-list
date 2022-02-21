@@ -62,7 +62,7 @@ const navbar = () => {
         navHeader = document.createElement('nav');
 
   container.className = 'container-fluid';
-  navHeader.className = 'navbar navbar-expand-md navbar-light bg-light';
+  navHeader.className = 'navbar navbar-expand-md navbar-light bg-green';
 
   container.appendChild(navbarBrand());
   container.appendChild(navbarMenu());
