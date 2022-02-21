@@ -1,7 +1,8 @@
+// All sidebar groups
 const buildAllGroups = (groupArray) => {
   const groupList = document.createElement('ul');
   groupList.className = 'list-unstyled ps-0';
-
+  
   groupArray.forEach(groupObj => {
     groupList.appendChild(buildGroup(groupObj));
   });
@@ -9,6 +10,7 @@ const buildAllGroups = (groupArray) => {
   return groupList;
 }
 
+// Individual sidebar groups
 const buildGroup = (groupObj) => {
   const group = document.createElement('li'),
         collapseDiv = document.createElement('div');
@@ -58,37 +60,32 @@ const buildGroupLists = (groupLists) => {
   return htmlList;
 }
 
-/* 
-<div class="sidebar flex-shrink-0 p-3 bg-white border-right" style="width: 280px;">
-  <ul class="list-unstyled ps-0">
-    <li class="mb-1">
-      <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-        <i class="bi bi-bookmark-fill"></i>
-        All
-      </button>
-      <div class="collapse show" id="home-collapse">
-        <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-          <li><a href="#" class="link-info rounded">My First List</a></li>
-        </ul>
-      </div>
-    </li>
-    <li class="border-top my-3"></li>
-    <li class="mb-1">
-      <button class="btn align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-        <i class="bi bi-bookmark-plus-fill"></i>
-        New Group
-      </button>
-    </li>
-  </ul>
-</div>
-*/
+// Add new group button
+const buildNewGroupBtn = () => {
+  const btnDiv = document.createElement('div'),
+        button = document.createElement('button'),
+        icon = document.createElement('i');
+  
+  icon.className = 'bi bi-bookmark-plus-fill';
 
+  button.className = 'btn align-items-center rounded';
+  button.appendChild(icon);
+  button.innerHTML += ' New Group';
+
+  btnDiv.className = 'mb-1 border-top my-3';
+  btnDiv.appendChild(button);
+
+  return btnDiv;
+}
+
+// Completed sidebar
 const sidebar = () => {
   const defaultGroup = [{title: 'All', lists: ['My First List']}],
         side = document.createElement('div');
 
-  side.className = 'sidebar flex-shrink-0 p-3 bg-white border-right';
+  side.className = 'sidebar flex-shrink-0 border-end p-3 bg-white';
   side.appendChild(buildAllGroups(defaultGroup));
+  side.appendChild(buildNewGroupBtn());
 
   return side;
 }
