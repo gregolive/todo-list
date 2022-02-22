@@ -40,7 +40,7 @@ nav {
 /* SIDEBAR */
 
 .sidebar {
-  min-height: calc(100vh - 56px - 62px);
+  min-height: calc(100vh - 56px - 46px);
   width: 280px;
   display: flex;
   flex-direction: column;

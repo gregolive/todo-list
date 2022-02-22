@@ -16,21 +16,6 @@ const navbarBrand = () => {
   return link;
 }
 
-const navbarMenu = () => {
-  const button = document.createElement('button'),
-        span = document.createElement('span');
-
-  span.className = 'navbar-toggler-icon';
-
-  button.className = 'navbar-toggler';
-  button.type = 'button';
-  button.setAttribute('data-bs-target', '#navbar');
-  button.setAttribute('data-bs-toggle', 'collapse');
-  button.appendChild(span);
-
-  return button;
-}
-
 const navbarLinks = () => {
   const linkDiv = document.createElement('div'),
         list = document.createElement('ul'),
@@ -47,29 +32,24 @@ const navbarLinks = () => {
   item.className = 'nav-item';
   item.appendChild(link);
 
-  list.className = 'navbar-nav ms-auto mb-2 mb-md-0';
+  list.className = 'navbar-nav ms-auto mb-md-0';
   list.appendChild(item);
 
-  linkDiv.className = 'collapse navbar-collapse';
-  linkDiv.id = 'navbar';
-  linkDiv.appendChild(list);
-
-  return linkDiv;
+  return list;
 }
 
 const navbar = () => {
   const container = document.createElement('div'),
-        navHeader = document.createElement('nav');
+        nav = document.createElement('nav');
 
   container.className = 'container-fluid';
-  navHeader.className = 'navbar navbar-expand-md navbar-light bg-green';
+  nav.className = 'navbar navbar-expand-md navbar-light bg-green';
 
   container.appendChild(navbarBrand());
-  container.appendChild(navbarMenu());
   container.appendChild(navbarLinks());
-  navHeader.appendChild(container);
+  nav.appendChild(container);
   
-  return navHeader;
+  return nav;
 }
 
 export default navbar;

@@ -1,55 +1,34 @@
 const buildFooterCopyright = () => {
   const container = document.createElement('div'),
-        span = document.createElement('span');
+        span = document.createElement('span'),
+        link = document.createElement('a'),
+        icon = document.createElement('i');
+
+  icon.className = 'bi bi-github';
+
+  link.className = 'text-muted fs-5 ms-2';
+  link.href = 'https://github.com/gregolive';
+  link.appendChild(icon);
   
   span.className = 'text-muted';
   span.textContent = '© gregolive';
   
-  container.className = 'col-md-4 d-flex align-items-center';
+  container.className = 'd-flex align-items-center';
   container.appendChild(span);
+  container.appendChild(link);
 
   return container;
-}
-
-const buildFooterLinks = () => {
-  const list = document.createElement('ul'),
-        links = [ {class: 'bi bi-github', href: 'https://github.com/gregolive'},
-                  {class: 'bi bi-window', href: 'https://gregolive.github.io/personal-portfolio/'} ];
-
-  list.className = 'nav col-md-4 justify-content-end list-unstyled d-flex';
-  links.forEach(link => {
-    list.appendChild(buildLink(link));
-  });
-
-  return list;
-}
-
-const buildLink = (linkObj) => {
-  const item = document.createElement('li'),
-        link = document.createElement('a'),
-        icon = document.createElement('i');
-
-  icon.className = linkObj.class;
-  
-  link.className = 'text-muted fs-5';
-  link.href = linkObj.href;
-  link.appendChild(icon);
-
-  item.className = 'ms-3';
-  item.appendChild(link);
-
-  return item;
 }
 
 const footer = () => {
   const container = document.createElement('div'),
         footer = document.createElement('footer');
   
-  footer.className = 'd-flex flex-wrap justify-content-between align-items-center';
+  footer.className = 'd-flex flex-wrap justify-content-center align-items-center';
   footer.appendChild(buildFooterCopyright());
-  footer.appendChild(buildFooterLinks());
+  //footer.appendChild(buildFooterLinks());
 
-  container.className = 'px-5 py-3 bg-light';
+  container.className = 'px-5 py-2 bg-light';
   container.appendChild(footer);
 
   return container;
