@@ -49,7 +49,7 @@ const buildGroupLists = (groupLists) => {
     const item = document.createElement('li'),
           link = document.createElement('a');
     
-    link.className = 'link-info rounded';
+    link.className = 'primary-color rounded';
     link.textContent = listName;
 
     item.appendChild(link);

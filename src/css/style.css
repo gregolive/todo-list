@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
 @import '~bootstrap-icons/font/bootstrap-icons';
 
 :root {
   --primary-color: #00BA91;
   --secondary-color: #04E492;
+  --header-color: #EBFFF7;
+  --faded-green: rgba(4, 228, 146, 0.25);
 }
 
 body {
@@ -25,38 +27,39 @@ nav {
   width: auto;
 }
 
+
 .btn-toggle-nav a {
   display: inline-flex;
   padding: 0.1875rem 0.5rem;
   margin-top: 0.125rem;
-  margin-left: 1.25rem;
+  margin-left: 1.5rem;
   text-decoration: none;
 }
 
 .bg-green {
-  background-color: #EBFFF7;
+  background-color: var(--header-color);
 }
 
 /* SIDEBAR */
 
 .sidebar {
   min-height: calc(100vh - 56px - 46px);
-  width: 280px;
+  width: max(25vw, 200px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
 .btn-check:focus+.btn, .btn:focus {
-  box-shadow: 0 0 0 0.25rem rgba(4, 228, 146, 0.25);
+  box-shadow: 0 0 0 0.25rem var(--faded-green);
 }
 
-a.link-info {
+.primary-color {
   color: var(--primary-color);
 }
 
-a.link-info:hover {
-  color: var(--secondary-color);
+a.primary-color:hover {
+  color: var(--teritary-color);
 }
 
 /* FOOTER */
@@ -68,4 +71,33 @@ footer {
 footer i {
   height: 24px;
   width: 24px;
+}
+
+/* MAIN */
+
+.h2 {
+  font-weight: 600;
+}
+
+.font-weight-light {
+  font-weight: 300;
+}
+
+.h2 {
+  font-weight: 600;
+}
+
+.form-check-input {
+  background-color: var(--faded-green);
+}
+
+.form-check-input:checked{
+  background-color: var(--primary-color);
+  border-color: rgba(0, 0, 0, 0.25);
+}
+
+.edit-button {
+  position: absolute;
+  right: 0.75rem;
+  top: 0;
 }
