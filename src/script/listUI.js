@@ -77,6 +77,62 @@ const buildListHeader = () => {
   return header;
 }
 
+// Dropdown button
+const dropdownButton = () => {
+  const div = document.createElement('div'),
+        button = document.createElement('a'),
+        icon = document.createElement('i');
+
+  icon.className = 'bi bi-three-dots h4 text-secondary';
+
+  button.id = 'dropdownMenuLink';
+  button.className = 'edit-button';
+  button.setAttribute('data-bs-toggle', 'dropdown');
+  button.setAttribute('role', 'button');
+  button.appendChild(icon);
+
+  div.className = 'dropdown';
+  div.appendChild(button);
+  div.appendChild(menuLinks());
+
+  return div;
+}
+
+const menuLinks = () => {
+  const list = document.createElement('ul');
+  list.className = 'dropdown-menu';
+  list.appendChild(buildMenuLink('Edit'));
+  list.appendChild(buildMenuLink('Delete'));
+
+  return list;      
+}
+
+const buildMenuLink = (name) => {
+  const item = document.createElement('li'),
+        link = document.createElement('a');
+
+  link.className = 'dropdown-item';
+  link.textContent = name;
+
+  item.appendChild(link);
+
+  return item;
+}
+
+/*
+<div class="dropdown">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    Dropdown link
+  </a>
+
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item" href="#">Action</a></li>
+    <li><a class="dropdown-item" href="#">Another action</a></li>
+    <li><a class="dropdown-item" href="#">Something else here</a></li>
+  </ul>
+</div>
+*/
+
 // Completed display
 const listUI = () => {
   const example = {
@@ -93,6 +149,7 @@ const listUI = () => {
   container.appendChild(buildDueDate(example.date));
   container.appendChild(buildDescription(example.description));
   container.appendChild(buildList(example.todo));
+  container.appendChild(dropdownButton());
 
   return container;
 }
