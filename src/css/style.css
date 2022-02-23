@@ -59,7 +59,7 @@ nav {
 }
 
 a.primary-color:hover {
-  color: var(--teritary-color);
+  color: var(--secondary-color);
 }
 
 /* FOOTER */
@@ -100,4 +100,21 @@ footer i {
   position: absolute;
   right: 0.75rem;
   top: 0.25rem;
+}
+
+/* MODAL */
+
+.modal {
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  width: 70%;
+  margin-bottom: 20vh;
 }

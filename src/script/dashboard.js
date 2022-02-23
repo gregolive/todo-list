@@ -1,7 +1,8 @@
 import navbar from './navbar.js';
 import sidebar from './sidebar.js';
-import listUI from './listUI.js';
+import listUI from './displayList.js';
 import footer from './footer.js';
+import newListModal from './newList.js';
 
 const main = () => {
   const main = document.createElement('main');
@@ -16,6 +17,7 @@ const dashboard = () => {
   document.body.appendChild(navbar());
   document.body.appendChild(main());
   document.body.appendChild(footer());
+  document.body.appendChild(newListModal());
 }
 
 export default dashboard;

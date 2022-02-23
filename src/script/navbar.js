@@ -16,16 +16,15 @@ const navbarBrand = () => {
   return link;
 }
 
-const navbarLinks = () => {
-  const linkDiv = document.createElement('div'),
-        list = document.createElement('ul'),
+const newListBtn = () => {
+  const list = document.createElement('ul'),
         item = document.createElement('li'),
         link = document.createElement('a'),
         icon = document.createElement('i');
 
   icon.className = 'bi bi-plus-lg';
 
-  link.className = 'nav-link active';
+  link.className = 'new-list nav-link active';
   link.appendChild(icon);
   link.innerHTML += ' New List';
 
@@ -46,7 +45,7 @@ const navbar = () => {
   nav.className = 'navbar navbar-expand-md navbar-light bg-green';
 
   container.appendChild(navbarBrand());
-  container.appendChild(navbarLinks());
+  container.appendChild(newListBtn());
   nav.appendChild(container);
   
   return nav;
