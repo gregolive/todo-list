@@ -1,6 +1,7 @@
-class Group {
-  constructor(title) {
-    this.title = title;
+export default class Group {
+  constructor(name, color) {
+    this.name = name;
+    this.color = color;
     this.lists = [];
     this.saveToLocalStorage();
   }
@@ -16,6 +17,7 @@ class Group {
   }
 
   saveToLocalStorage() {
-    localStorage.setItem(title, JSON.stringify(this.lists));
+    localStorage.setItem(this.name, JSON.stringify(this.lists));
+    console.log('saved');
   }
 }

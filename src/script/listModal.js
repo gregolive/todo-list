@@ -5,7 +5,7 @@ const textInput = (type, name, placeholder) => {
         input = document.createElement(type);
 
   input.className = 'form-control';
-  input.id = name.toLowerCase();
+  input.id = `list-${name.toLowerCase()}`;
   input.setAttribute('type', 'text');
   input.setAttribute('placeholder', placeholder);
 
@@ -91,9 +91,12 @@ const formBtns = () => {
         cancelBtn = document.createElement('button'),
         submitBtn = document.createElement('button');
 
-  cancelBtn.className = 'btn btn-secondary btn-cancel';
+  cancelBtn.id = 'cancel-list';
+  cancelBtn.className = 'btn btn-secondary';
   cancelBtn.textContent = 'Cancel';
   cancelBtn.setAttribute('type', 'button');
+
+  submitBtn.id = 'submit-list';
   submitBtn.className = 'btn btn-success btn-submit-list';
   submitBtn.textContent = 'Create List';
   submitBtn.setAttribute('type', 'submit');
@@ -129,6 +132,7 @@ const buildModalHeader = () => {
   heading.className = 'modal-title';
   heading.textContent = 'New List';
 
+  button.id = 'close-list';
   button.className = 'btn-close';
   button.setAttribute('type', 'button');
 

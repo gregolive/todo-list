@@ -24,6 +24,7 @@ const newListBtn = () => {
 
   icon.className = 'bi bi-plus-lg';
 
+  link.id = 'new-list';
   link.className = 'new-list nav-link active';
   link.appendChild(icon);
   link.innerHTML += ' New List';

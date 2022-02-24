@@ -68,6 +68,7 @@ const buildNewGroupBtn = () => {
   
   icon.className = 'bi bi-bookmark-plus-fill';
 
+  button.id = 'new-group';
   button.className = 'btn align-items-center rounded';
   button.appendChild(icon);
   button.innerHTML += ' New Group';
