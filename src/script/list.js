@@ -1,13 +1,17 @@
-class List {
-  idCount = 0;
+export default class List {
+  static _count = JSON.parse(localStorage.getItem('count')) || 0;
 
-  constructor(title, priority, date, description, todo) {
-    this.id = idCount;
+  constructor(title, priority, date, description) {
+    this.id = ++List._count;
     this.title = title;
     this.priority = priority;
     this.date = date;
     this.description = description;
-    this.todo = todo;
-    idCount++;
+    this.saveToLocalStorage();
+  }
+
+  saveToLocalStorage() {
+    localStorage.setItem(`list${this.id}`, JSON.stringify(this));
+    localStorage.setItem('count', this.id);
   }
 }

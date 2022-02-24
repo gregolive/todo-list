@@ -115,7 +115,7 @@ footer i {
 }
 
 .modal-content {
-  width: max(60vw, 400px);
+  width: 60vw;
   margin-bottom: 10vh;
 }
 
@@ -141,7 +141,11 @@ footer i {
   margin-top: 1.5rem;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1024px) {
+  .modal-content {
+    width: max(80vw, 400px);
+  }
+  
   .col-sm-2 {
     flex-shrink: 0;
     width: 100%;

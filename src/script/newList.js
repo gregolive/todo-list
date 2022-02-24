@@ -1,46 +1,3 @@
-/* 
-<div id="bookModal" class="modal">
-    <div class="modal-content">
-      <form id="book-form">
-        <div class="row mb-3">
-          <label for="title" class="col-sm-2 col-form-label">Title</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="title">
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label for="author" class="col-sm-2 col-form-label">Author</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control" id="author">
-          </div>
-        </div>
-
-        <div class="row mb-3">
-          <label for="pages" class="col-sm-2 col-form-label">Pages</label>
-          <div class="col-sm-10">
-            <input type="number" class="form-control" id="pages">
-          </div>
-        </div>
-
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" value="true" id="read">
-          <label class="form-check-label" for="read">
-            Have you already read this book?
-          </label>
-        </div>
-        
-        <div class="form-group row">
-          <div class="col-sm-10">
-            <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-            <button type="submit" class="btn btn-info" onclick="closeModal()">Add Book</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-*/
-
 const textInput = (type, name, placeholder) => {
   const container = document.createElement('div'),
         label = document.createElement('label'),
@@ -48,7 +5,7 @@ const textInput = (type, name, placeholder) => {
         input = document.createElement(type);
 
   input.className = 'form-control';
-  input.id = name;
+  input.id = name.toLowerCase();
   input.setAttribute('type', 'text');
   input.setAttribute('placeholder', placeholder);
 
@@ -56,7 +13,7 @@ const textInput = (type, name, placeholder) => {
   inputContainer.appendChild(input);
 
   label.className = 'col-sm-2 col-form-label';
-  label.setAttribute('for', name);
+  label.setAttribute('for', name.toLowerCase());
   label.textContent = name;
 
   container.className = 'row mb-3';
@@ -73,14 +30,14 @@ const dateInput = () => {
         input = document.createElement('input');
 
   input.className = 'form-control';
-  input.id = 'dueDate';
+  input.id = 'due-date';
   input.setAttribute('type', 'date');
 
   inputContainer.className = 'col-sm-10';
   inputContainer.appendChild(input);
 
   label.className = 'col-sm-2 col-form-label';
-  label.setAttribute('for', 'dueDate');
+  label.setAttribute('for', 'due-date');
   label.textContent = 'Due Date';
 
   container.className = 'row mb-3';
@@ -110,6 +67,7 @@ const priorityInput = () => {
     input.id = priority;
     input.className = 'btn-check';
     input.setAttribute('type', 'radio');
+    input.setAttribute('value', priority);
     input.setAttribute('name', 'priority');
 
     icon.className = `bi bi-thermometer-${priority} h4`;
@@ -128,15 +86,6 @@ const priorityInput = () => {
   return container;
 }
 
-/*
-<div class="form-group row">
-  <div class="col-sm-10">
-    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-    <button type="submit" class="btn btn-info" onclick="closeModal()">Add Book</button>
-  </div>
-</div>
-*/
-
 const formBtns = () => {
   const div = document.createElement('div'),
         cancelBtn = document.createElement('button'),
@@ -145,7 +94,7 @@ const formBtns = () => {
   cancelBtn.className = 'btn btn-secondary btn-cancel';
   cancelBtn.textContent = 'Cancel';
   cancelBtn.setAttribute('type', 'button');
-  submitBtn.className = 'btn btn-success btn-new';
+  submitBtn.className = 'btn btn-success btn-submit-list';
   submitBtn.textContent = 'Create List';
   submitBtn.setAttribute('type', 'submit');
 
