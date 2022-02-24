@@ -1,11 +1,11 @@
 import List from './list.js';
 
-const openModal = () => {
+const openListModal = () => {
   const modal = document.getElementById('new-list-modal');
   modal.classList.add('show');
 }
 
-const closeModal = () => {
+const closeListModal = () => {
   const modal = document.getElementById('new-list-modal');
   modal.classList.remove('show');
 }
@@ -24,16 +24,18 @@ const submitListForm = (e) => {
     }
   });
 
-  let list = new List(title, priority, date, description);
-  console.log(list);
+  new List(title, priority, date, description);
 }
 
 const addEventListeners = () => {
   // New List Modal
-  document.querySelector('.new-list').addEventListener('click', openModal);
-  document.querySelector('.btn-close').addEventListener('click', closeModal);
-  document.querySelector('.btn-close').addEventListener('click', closeModal);
+  document.querySelector('.new-list').addEventListener('click', openListModal);
+  document.querySelector('.btn-close').addEventListener('click', closeListModal);
+  document.querySelector('.btn-close').addEventListener('click', closeListModal);
   document.querySelector('.btn-submit-list').addEventListener('click', submitListForm);
+
+  // New Group Modal
+  
 }
 
 export default addEventListeners;
