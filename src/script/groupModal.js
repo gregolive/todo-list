@@ -58,7 +58,7 @@ const formBtns = () => {
   cancelBtn.setAttribute('type', 'button');
 
   submitBtn.id = 'submit-group';
-  submitBtn.className = 'btn btn-success btn-submit';
+  submitBtn.className = 'btn btn-success btn-submit-group';
   submitBtn.textContent = 'Create Group';
   submitBtn.setAttribute('type', 'submit');
 
@@ -75,10 +75,10 @@ const buildGroupForm = () => {
 
   form.appendChild(titleInput());
   form.appendChild(colorInput());
+  form.appendChild(formBtns());
 
   modalBody.className = 'modal-body';
   modalBody.appendChild(form);
-  modalBody.appendChild(formBtns());
 
   return modalBody;
 }
