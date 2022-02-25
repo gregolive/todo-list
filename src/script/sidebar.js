@@ -16,11 +16,11 @@ const buildGroup = (groupObj) => {
         collapseDiv = document.createElement('div');
   
   collapseDiv.className = 'collapse show';
-  collapseDiv.id = `${groupObj.title}-collapse`;
+  collapseDiv.id = `${groupObj.name}-collapse`;
   collapseDiv.appendChild(buildGroupLists(groupObj.lists));
 
   group.className = 'mb-1';
-  group.appendChild(buildGroupHeader(groupObj.title));
+  group.appendChild(buildGroupHeader(groupObj.name));
   group.appendChild(collapseDiv);
 
   return group;
@@ -45,12 +45,12 @@ const buildGroupLists = (groupLists) => {
   const htmlList = document.createElement('ul');
   htmlList.className = 'btn-toggle-nav list-unstyled fw-normal pb-1 small';
   
-  groupLists.forEach(listName => {
+  groupLists.forEach(list => {
     const item = document.createElement('li'),
           link = document.createElement('a');
     
     link.className = 'primary-color rounded';
-    link.textContent = listName;
+    link.textContent = list.title;
 
     item.appendChild(link);
 
@@ -80,12 +80,12 @@ const buildNewGroupBtn = () => {
 }
 
 // Completed sidebar
-const sidebar = () => {
+const sidebar = groups => {
   const defaultGroup = [{title: 'All', lists: ['My First List']}],
         side = document.createElement('div');
 
   side.className = 'sidebar flex-shrink-0 border-end p-3 bg-white';
-  side.appendChild(buildAllGroups(defaultGroup));
+  side.appendChild(buildAllGroups(groups));
   side.appendChild(buildNewGroupBtn());
 
   return side;

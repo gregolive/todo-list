@@ -10,6 +10,7 @@ export default class List {
     this.priority = priority;
     this.date = date;
     this.description = description;
+    this.todo = [];
     this.addToGroup('All');
   }
 

@@ -120,21 +120,14 @@ const buildMenuLink = (name) => {
 }
 
 // Completed display
-const listUI = () => {
-  const example = {
-                    title: 'My First List', 
-                    priority: 'low', 
-                    description: 'This is my first todo list on listify. How exciting!',
-                    date: 'March 3, 2022',
-                    todo: ['Create a new todo list', 'Share listify with my friends', 'Profit']
-                  },
-        container = document.createElement('div');
+const listUI = list => {
+  const container = document.createElement('div');
   
   container.className = 'container-fluid position-relative m-5';
-  container.appendChild(buildTitle(example.title, example.priority));
-  container.appendChild(buildDueDate(example.date));
-  container.appendChild(buildDescription(example.description));
-  container.appendChild(buildList(example.todo));
+  container.appendChild(buildTitle(list.title, list.priority));
+  container.appendChild(buildDueDate(list.date));
+  container.appendChild(buildDescription(list.description));
+  container.appendChild(buildList(list.todo));
   container.appendChild(dropdownButton());
 
   return container;
