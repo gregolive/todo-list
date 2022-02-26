@@ -1,11 +1,10 @@
 import List from './list.js';
-import Group from './group.js';
 
 const findListFromLocalStorage = (listTitle, groupName) => {
   const group = JSON.parse(localStorage.getItem(groupName));
   const listIndex = group.lists.findIndex(list => list.title === listTitle);
-  console.log(group[listIndex]);
-  return group[listIndex];
+  console.log(group.lists[listIndex]);
+  return group.lists[listIndex];
 }
 
 const buildDefaultList = () => {
@@ -19,7 +18,6 @@ const buildGroupsFromLocalStorage = () => {
 
   while ( i-- ) {
     groups.push( JSON.parse(localStorage.getItem(keys[i])) );
-    console.log(groups)
   }
 
   return groups;

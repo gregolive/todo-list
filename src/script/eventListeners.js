@@ -52,8 +52,8 @@ const submitGroupModal = e => {
 // List view function
 
 const viewList = e => {
-  const listTitle = e.target.textContent,
-        groupName = e.target.closest('.collapse').previousSibling.textContent;
+  const listTitle = e.target.textContent.trim(),
+        groupName = e.target.closest('.collapse').previousSibling.textContent.trim();
   updateDashboard(findListFromLocalStorage(listTitle, groupName));
 }
 

@@ -5,6 +5,7 @@ import footer from './footer.js';
 import newListModal from './listModal';
 import newGroupModal from './groupModal';
 import { fetchGroups } from './objectControl.js';
+import addEventListeners from './eventListeners.js';
 
 const main = list => {
   const main = document.createElement('main'),
@@ -20,10 +21,11 @@ const main = list => {
 }
 
 const updateDashboard = list => {
-  const main = document.getElementById('main'),
-        nav = document.querySelector('.navbar');
-  main.remove();
-  nav.insertAfter(main(list), nav);
+  const mainEl = document.getElementById('main'),
+        footer = document.querySelector('.footer');
+  mainEl.remove();
+  document.body.insertBefore(main(list), footer);
+  addEventListeners();
 }
 
 const dashboard = () => {
@@ -32,6 +34,7 @@ const dashboard = () => {
   document.body.appendChild(footer());
   document.body.appendChild(newListModal());
   document.body.appendChild(newGroupModal());
+  addEventListeners();
 }
 
 export { dashboard, updateDashboard };

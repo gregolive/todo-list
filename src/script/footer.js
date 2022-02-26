@@ -27,7 +27,7 @@ const footer = () => {
   footer.className = 'd-flex flex-wrap justify-content-center align-items-center';
   footer.appendChild(buildFooterText());
 
-  container.className = 'px-5 py-2 bg-light';
+  container.className = 'footer px-5 py-2 bg-light';
   container.appendChild(footer);
 
   return container;
