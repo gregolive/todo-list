@@ -46,7 +46,7 @@ const submitGroupModal = e => {
   const name = document.getElementById('group-name').value,
         color = document.getElementById('color').value;
   
-  new Group(name, color);
+  new Group(name, color, []);
 }
 
 // List view function

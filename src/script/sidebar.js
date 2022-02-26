@@ -1,5 +1,5 @@
 // All sidebar groups
-const buildAllGroups = (groupArray) => {
+const buildAllGroups = groupArray => {
   const groupList = document.createElement('ul');
   groupList.className = 'list-unstyled ps-0';
   
@@ -11,32 +11,33 @@ const buildAllGroups = (groupArray) => {
 }
 
 // Individual sidebar groups
-const buildGroup = (groupObj) => {
+const buildGroup = groupObj => {
   const group = document.createElement('li'),
         collapseDiv = document.createElement('div');
   
   collapseDiv.className = 'collapse show';
-  collapseDiv.id = `${groupObj.name.toLowerCase()}-collapse`;
+  collapseDiv.id = `${groupObj.name.replace(/\s+/g, '-').toLowerCase()}-collapse`;
   collapseDiv.appendChild(buildGroupLists(groupObj.lists));
 
   group.className = 'mb-1';
-  group.appendChild(buildGroupHeader(groupObj.name));
+  group.appendChild(buildGroupHeader(groupObj));
   group.appendChild(collapseDiv);
 
   return group;
 }
 
-const buildGroupHeader = (groupTitle) => {
+const buildGroupHeader = group => {
   const groupHeader = document.createElement('button'),
         icon = document.createElement('i');
 
   icon.className = 'bi bi-bookmark-fill';
+  icon.style.color = group.color;
 
   groupHeader.className = 'btn btn-toggle align-items-center rounded collapsed';
   groupHeader.setAttribute('data-bs-toggle', 'collapse');
-  groupHeader.setAttribute('data-bs-target', `#${groupTitle.toLowerCase()}-collapse`);
+  groupHeader.setAttribute('data-bs-target', `#${group.name.replace(/\s+/g, '-').toLowerCase()}-collapse`);
   groupHeader.appendChild(icon);
-  groupHeader.innerHTML += ` ${groupTitle}`;
+  groupHeader.innerHTML += ` ${group.name}`;
 
   return groupHeader;
 }
@@ -44,7 +45,7 @@ const buildGroupHeader = (groupTitle) => {
 const buildGroupLists = (groupLists) => {
   const htmlList = document.createElement('ul');
   htmlList.className = 'btn-toggle-nav list-unstyled fw-normal pb-1 small';
-  
+
   groupLists.forEach(list => {
     const item = document.createElement('li'),
           link = document.createElement('a');
@@ -81,9 +82,7 @@ const buildNewGroupBtn = () => {
 
 // Completed sidebar
 const sidebar = groups => {
-  const defaultGroup = [{title: 'All', lists: ['My First List']}],
-        side = document.createElement('div');
-
+  const side = document.createElement('div');
   side.className = 'sidebar flex-shrink-0 border-end p-3 bg-white';
   side.appendChild(buildAllGroups(groups));
   side.appendChild(buildNewGroupBtn());
