@@ -8,7 +8,12 @@ const findListFromLocalStorage = (listTitle, groupName) => {
 }
 
 const buildDefaultList = () => {
-  new List('My First List', 'low', 'March 3, 2022', 'This is my first todo list on listify. How exciting!');
+  new List( 'My First List',
+            'low', 'March 3, 2022',
+            'This is my first todo list on listify. How exciting!',
+            'My Lists',
+            ['Create a new todo list', 'Share listify with my friends', 'Profit'] 
+          );
 }
 
 const buildGroupsFromLocalStorage = () => {

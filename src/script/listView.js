@@ -65,8 +65,41 @@ const buildListForm = (todo) => {
 
     form.appendChild(checkboxDiv);
   });
+  
+  form.id = 'todo-form';
+  form.appendChild(newTodoLink());
 
   return form;
+}
+
+const newTodoLink = () => {
+  const link = document.createElement('a');
+  link.id = 'new-todo';
+  link.className = 'primary-color d-block mt-2';
+  link.textContent = '+ Add new todo';
+
+  return link;
+}
+
+const newTodoInput = () => {
+  const div = document.createElement('div'),
+        input = document.createElement('input'),
+        button = document.createElement('button');
+  
+  input.className = 'form-control';
+  input.setAttribute('type', 'text');
+  input.setAttribute('placeholder', 'Book flights');
+
+  button.id = 'submit-todo';
+  button.className = 'btn btn-outline-secondary';
+  button.textContent = 'Add';
+  button.setAttribute('type', 'button');
+
+  div.classList = 'input-group mt-2';
+  div.appendChild(input);
+  div.appendChild(button);
+
+  return div;
 }
 
 const buildListHeader = () => {
@@ -133,4 +166,4 @@ const listView = list => {
   return container;
 }
 
-export default listView;
+export { listView, newTodoInput };

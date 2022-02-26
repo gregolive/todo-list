@@ -1,6 +1,7 @@
 import navbar from './navbar.js';
 import sidebar from './sidebar.js';
-import listView from './listView.js';
+import { listView 
+} from './listView.js';
 import footer from './footer.js';
 import newListModal from './listModal';
 import newGroupModal from './groupModal';

@@ -2,7 +2,7 @@ import List from './list.js';
 import Group from './group.js';
 import { findListFromLocalStorage } from './objectControl.js';
 import { updateDashboard } from './dashboard.js';
-
+import { newTodoInput } from './listView.js';
 
 // List functions
 
@@ -49,12 +49,19 @@ const submitGroupModal = e => {
   new Group(name, color, []);
 }
 
-// List view function
+// Sidebar list view function
 
 const viewList = e => {
   const listTitle = e.target.textContent.trim(),
         groupName = e.target.closest('.collapse').previousSibling.textContent.trim();
   updateDashboard(findListFromLocalStorage(listTitle, groupName));
+}
+
+// Add todo function
+
+const addTodoInput = e => {
+  const form = document.getElementById('todo-form');
+  form.insertBefore(newTodoInput(), e.target);
 }
 
 const addEventListeners = () => {
@@ -70,10 +77,13 @@ const addEventListeners = () => {
   document.getElementById('cancel-group').addEventListener('click', closeGroupModal);
   document.getElementById('submit-group').addEventListener('click', submitGroupModal);
 
-  // Sidebar List View
+  // Sidebar Lists
   document.querySelectorAll('.sidebar-link').forEach(link => {
     link.addEventListener('click', viewList)
   });
+
+  // List View
+  document.getElementById('new-todo').addEventListener('click', addTodoInput)
 }
 
 export default addEventListeners;
