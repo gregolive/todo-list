@@ -120,7 +120,7 @@ const buildMenuLink = (name) => {
 }
 
 // Completed display
-const listUI = list => {
+const listView = list => {
   const container = document.createElement('div');
   
   container.className = 'container-fluid position-relative m-5';
@@ -133,4 +133,4 @@ const listUI = list => {
   return container;
 }
 
-export default listUI;
+export default listView;

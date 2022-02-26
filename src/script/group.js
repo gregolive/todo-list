@@ -17,6 +17,7 @@ export default class Group {
   }
 
   saveToLocalStorage() {
+    console.log(this);
     localStorage.setItem(this.name, JSON.stringify(this));
   }
 }

@@ -16,7 +16,7 @@ const buildGroup = (groupObj) => {
         collapseDiv = document.createElement('div');
   
   collapseDiv.className = 'collapse show';
-  collapseDiv.id = `${groupObj.name}-collapse`;
+  collapseDiv.id = `${groupObj.name.toLowerCase()}-collapse`;
   collapseDiv.appendChild(buildGroupLists(groupObj.lists));
 
   group.className = 'mb-1';
@@ -34,7 +34,7 @@ const buildGroupHeader = (groupTitle) => {
 
   groupHeader.className = 'btn btn-toggle align-items-center rounded collapsed';
   groupHeader.setAttribute('data-bs-toggle', 'collapse');
-  groupHeader.setAttribute('data-bs-target', `#${groupTitle}-collapse`);
+  groupHeader.setAttribute('data-bs-target', `#${groupTitle.toLowerCase()}-collapse`);
   groupHeader.appendChild(icon);
   groupHeader.innerHTML += ` ${groupTitle}`;
 
@@ -49,7 +49,7 @@ const buildGroupLists = (groupLists) => {
     const item = document.createElement('li'),
           link = document.createElement('a');
     
-    link.className = 'primary-color rounded';
+    link.className = 'sidebar-link primary-color rounded';
     link.textContent = list.title;
 
     item.appendChild(link);

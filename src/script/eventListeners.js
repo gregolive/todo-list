@@ -1,5 +1,8 @@
 import List from './list.js';
 import Group from './group.js';
+import { findListFromLocalStorage } from './objectControl.js';
+import { updateDashboard } from './dashboard.js';
+
 
 // List functions
 
@@ -45,6 +48,14 @@ const submitGroupModal = e => {
   new Group(name, color);
 }
 
+// List view function
+
+const viewList = e => {
+  const listTitle = e.target.textContent,
+        groupName = e.target.closest('.collapse').previousSibling.textContent;
+  updateDashboard(findListFromLocalStorage(listTitle, groupName));
+}
+
 const addEventListeners = () => {
   // New List Modal
   document.getElementById('new-list').addEventListener('click', openListModal);
@@ -57,6 +68,11 @@ const addEventListeners = () => {
   document.getElementById('close-group').addEventListener('click', closeGroupModal);
   document.getElementById('cancel-group').addEventListener('click', closeGroupModal);
   document.getElementById('submit-group').addEventListener('click', submitGroupModal);
+
+  // Sidebar List View
+  document.querySelectorAll('.sidebar-link').forEach(link => {
+    link.addEventListener('click', viewList)
+  });
 }
 
 export default addEventListeners;
