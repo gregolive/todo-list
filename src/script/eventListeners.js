@@ -18,6 +18,7 @@ const submitListForm = e => {
   const title = document.getElementById('list-title').value,
         description = document.getElementById('list-description').value,
         date = document.getElementById('due-date').value,
+        group = document.getElementById('group').value,
         priorities = document.querySelectorAll("[name='priority']");
   let priority;
 
@@ -28,7 +29,7 @@ const submitListForm = e => {
     }
   });
 
-  new List(title, priority, date, description);
+  new List(title, priority, date, description, group);
 }
 
 // Group functions 

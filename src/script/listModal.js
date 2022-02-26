@@ -1,3 +1,5 @@
+import { buildGroupsFromLocalStorage } from './objectControl.js'
+
 const textInput = (type, name, placeholder) => {
   const container = document.createElement('div'),
         label = document.createElement('label'),
@@ -86,6 +88,36 @@ const priorityInput = () => {
   return container;
 }
 
+const groupSelect = () => {
+  const container = document.createElement('div'),
+        label = document.createElement('label'),
+        inputContainer = document.createElement('div'),
+        select = document.createElement('select');
+
+  select.className = 'form-select';
+  select.id = 'group';
+
+  buildGroupsFromLocalStorage().forEach(group => {
+    const option = document.createElement('option');
+    option.setAttribute('value', group.name);
+    option.textContent = group.name;
+    select.appendChild(option);
+  })
+
+  inputContainer.className = 'col-sm-10';
+  inputContainer.appendChild(select);
+
+  label.className = 'col-sm-2 col-form-label';
+  label.setAttribute('for', 'due-date');
+  label.textContent = 'Group';
+
+  container.className = 'row mb-3';
+  container.appendChild(label);
+  container.appendChild(inputContainer);
+
+  return container;
+}
+
 const formBtns = () => {
   const div = document.createElement('div'),
         cancelBtn = document.createElement('button'),
@@ -116,6 +148,7 @@ const buildListForm = () => {
   form.appendChild(textInput('textarea', 'Description', 'This trip is going to be the best!'));
   form.appendChild(priorityInput());
   form.appendChild(dateInput());
+  form.appendChild(groupSelect());
   form.appendChild(formBtns());
 
   modalBody.className = 'modal-body';
