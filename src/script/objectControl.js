@@ -1,5 +1,6 @@
 import { format } from 'date-fns';
 import List from './list.js';
+import Todo from './todo.js';
 
 // Find first list in first non-empty group
 const firstAvaliableList = groups => {
@@ -24,7 +25,7 @@ const addTodoToList = (task, listTitle, groupName) => {
         listIndex = group.lists.findIndex(list => list.title === listTitle),
         list = group.lists[listIndex];
   
-  list.todo.push(task);
+  list.todo.push(new Todo(task));
   localStorage.setItem(group.name, JSON.stringify(group));
 }
 
@@ -40,7 +41,7 @@ const buildDefaultList = () => {
             format(new Date(), 'yyyy-MM-dd'),
             'This is my first todo list on listify. How exciting!',
             'My Lists',
-            ['Create a new todo list', 'Share listify with my friends', 'Profit'] 
+            [new Todo('Create a new todo list'), new Todo('Share listify with my friends'), new Todo('Profit')] 
           );
 }
 

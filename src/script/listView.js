@@ -80,8 +80,8 @@ const buildListHeader = () => {
 const buildListForm = todo => {
   const form = document.createElement('form');
 
-  todo.forEach((task, index) => {
-    form.appendChild(buildTodoItem(task, index));
+  todo.forEach((item, index) => {
+    form.appendChild(buildTodoItem(item, index));
   });
   
   form.id = 'todo-form';
@@ -90,18 +90,21 @@ const buildListForm = todo => {
   return form;
 }
 
-const buildTodoItem = (task, index) => {
+const buildTodoItem = (todo, index) => {
   const checkboxDiv = document.createElement('div'),
-          input = document.createElement('input'),
-          label = document.createElement('label');
+        input = document.createElement('input'),
+        label = document.createElement('label');
 
   input.id = `check${index}`;
   input.className = 'form-check-input';
   input.type = 'checkbox';
+  if (todo.complete === true) {
+    input.checked = true;
+  }
 
   label.className = 'form-check-label';
   label.setAttribute('for', `check${index}`);
-  label.textContent = task;
+  label.textContent = todo.task;
   
   checkboxDiv.className = 'form-check';
   checkboxDiv.append(input);
