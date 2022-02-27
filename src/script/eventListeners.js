@@ -1,8 +1,9 @@
 import List from './list.js';
 import Group from './group.js';
+import Todo from './todo.js';
 import { findListFromLocalStorage, addTodoToList, changeTodoStatus } from './objectControl.js';
 import { updateDashboard } from './dashboard.js';
-import { newTodoInput } from './listView.js';
+import { newTodoInput, buildTodoItem } from './listView.js';
 
 // List functions
 
@@ -54,6 +55,7 @@ const submitGroupForm = () => {
 const viewList = e => {
   const listTitle = e.target.textContent,
         groupName = e.target.closest('.collapse').previousSibling.textContent;
+
   updateDashboard(findListFromLocalStorage(listTitle, groupName));
 }
 
@@ -67,17 +69,24 @@ const addTodoInput = e => {
 }
 
 const addTodo = e => {
-  const todo = e.target.previousSibling.value,
+  const form = document.getElementById('todo-form'),
+        index = document.querySelectorAll('.form-check-input').length,
+        todo = e.target.previousSibling.value,
         listTitle = document.querySelector('h1').textContent,
         groupName = document.querySelector('.list-group').textContent;
 
   addTodoToList(todo, listTitle, groupName);
+  form.insertBefore(buildTodoItem(new Todo(todo), index), e.target.parentNode);
+  e.preventDefault();
+  console.log(e.target.previousSibling);
+  form.reset();
 }
 
 const updateTodoComplete = e => {
   const todo = e.target.nextSibling.textContent,
         listTitle = document.querySelector('h1').textContent,
         groupName = document.querySelector('.list-group').textContent;
+
   changeTodoStatus(todo, listTitle, groupName);
 }
 

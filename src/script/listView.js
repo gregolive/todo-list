@@ -210,4 +210,4 @@ const listView = list => {
   return (typeof list !== 'undefined') ? showList(list) : noList();
 }
 
-export { listView, newTodoInput };
+export { listView, newTodoInput, buildTodoItem };
