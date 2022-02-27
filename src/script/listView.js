@@ -177,6 +177,7 @@ const buildMenuLink = (name) => {
   const item = document.createElement('li'),
         link = document.createElement('a');
 
+  link.id = `${name.toLowerCase()}-list`
   link.className = 'dropdown-item';
   link.textContent = name;
 

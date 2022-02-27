@@ -2,6 +2,11 @@ import { format } from 'date-fns';
 import List from './list.js';
 import Todo from './todo.js';
 
+// Resave group to local storage
+const saveGroup = group => {
+  localStorage.setItem(group.name, JSON.stringify(group));
+}
+
 // Find first list in first non-empty group
 const firstAvaliableList = groups => {
   for (const group of groups) {
@@ -26,7 +31,7 @@ const addTodoToList = (task, listTitle, groupName) => {
         list = group.lists[listIndex];
   
   list.todo.push(new Todo(task));
-  localStorage.setItem(group.name, JSON.stringify(group));
+  saveGroup(group);
 }
 
 // Update todo complete
@@ -38,7 +43,16 @@ const changeTodoStatus = (todoTask, listTitle, groupName) => {
         todo = list.todo[todoIndex];
   
   todo.complete = (todo.complete === true) ? false : true;
-  localStorage.setItem(group.name, JSON.stringify(group));
+  saveGroup(group);
+}
+
+// Remove List From Group
+const removeListFromGroup = (listTitle, groupName) => {
+  const group = JSON.parse(localStorage.getItem(groupName)),
+        listIndex = group.lists.findIndex(list => list.title === listTitle);
+
+  group.lists.splice(listIndex, 1);
+  saveGroup(group);
 }
 
 // Default list for new session
@@ -77,4 +91,4 @@ const fetchGroups = () => {
   return buildGroupsFromLocalStorage();
 }
 
-export { findListFromLocalStorage, buildGroupsFromLocalStorage, fetchGroups, firstAvaliableList, addTodoToList, changeTodoStatus };
+export { findListFromLocalStorage, buildGroupsFromLocalStorage, fetchGroups, firstAvaliableList, addTodoToList, changeTodoStatus, removeListFromGroup };

@@ -1,7 +1,7 @@
 import List from './list.js';
 import Group from './group.js';
 import Todo from './todo.js';
-import { findListFromLocalStorage, addTodoToList, changeTodoStatus } from './objectControl.js';
+import { findListFromLocalStorage, addTodoToList, changeTodoStatus, removeListFromGroup } from './objectControl.js';
 import { updateDashboard } from './dashboard.js';
 import { newTodoInput, buildTodoItem } from './listView.js';
 
@@ -59,7 +59,7 @@ const viewList = e => {
   updateDashboard(findListFromLocalStorage(listTitle, groupName));
 }
 
-// Add todo functions
+// List functions
 
 const addTodoInput = e => {
   const form = document.getElementById('todo-form');
@@ -90,6 +90,14 @@ const updateTodoComplete = e => {
   changeTodoStatus(todo, listTitle, groupName);
 }
 
+const deleteList = () => {
+  const listTitle = document.querySelector('h1').textContent,
+        groupName = document.querySelector('.list-group').textContent;
+  
+  removeListFromGroup(listTitle, groupName);
+  window.location.reload();
+}
+
 // Default Event Listeners
 
 const addEventListeners = () => {
@@ -107,7 +115,7 @@ const addEventListeners = () => {
 
   // Sidebar Lists
   document.querySelectorAll('.sidebar-link').forEach(link => {
-    link.addEventListener('click', viewList)
+    link.addEventListener('click', viewList);
   });
 
   // List View (only if there is a list to display)
@@ -115,8 +123,9 @@ const addEventListeners = () => {
   if (newTodo !== null) {
     newTodo.addEventListener('click', addTodoInput);
     document.querySelectorAll('.form-check-input').forEach(checkbox => {
-      checkbox.addEventListener('change', updateTodoComplete)
+      checkbox.addEventListener('change', updateTodoComplete);
     })
+    document.getElementById('delete-list').addEventListener('click', deleteList)
   }
 }
 
