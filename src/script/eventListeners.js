@@ -14,7 +14,7 @@ const closeListModal = () => {
   document.getElementById('new-list-modal').classList.remove('show');
 }
 
-const submitListForm = e => {
+const submitListForm = () => {
   const title = document.getElementById('list-title').value,
         description = document.getElementById('list-description').value,
         date = document.getElementById('due-date').value,
@@ -42,12 +42,11 @@ const closeGroupModal = () => {
   document.getElementById('new-group-modal').classList.remove('show');
 }
 
-const submitGroupForm = e => {
+const submitGroupForm = () => {
   const name = document.getElementById('group-name').value,
         color = document.getElementById('color').value;
   
   new Group(name, color, []);
-  console.log('saving')
 }
 
 // Sidebar list view function
