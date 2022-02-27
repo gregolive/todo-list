@@ -1,22 +1,26 @@
+import { format } from 'date-fns';
 import { buildGroupsFromLocalStorage } from './objectControl.js'
 
-const textInput = (type, name, placeholder) => {
+const titleInput = list => {
   const container = document.createElement('div'),
         label = document.createElement('label'),
         inputContainer = document.createElement('div'),
-        input = document.createElement(type);
+        input = document.createElement('input');
 
   input.className = 'form-control';
-  input.id = `list-${name.toLowerCase()}`;
+  input.id = 'list-title';
   input.setAttribute('type', 'text');
-  input.setAttribute('placeholder', placeholder);
+  input.setAttribute('placeholder', 'Summer Vacation');
+  if (typeof list !== 'undefined') {
+    input.value = list.title;
+  }
 
   inputContainer.className = 'col-sm-10';
   inputContainer.appendChild(input);
 
   label.className = 'col-sm-2 col-form-label';
-  label.setAttribute('for', name.toLowerCase());
-  label.textContent = name;
+  label.setAttribute('for', 'list-title');
+  label.textContent = 'Title';
 
   container.className = 'row mb-3';
   container.appendChild(label);
@@ -25,7 +29,35 @@ const textInput = (type, name, placeholder) => {
   return container;
 }
 
-const dateInput = () => {
+const descriptionInput = list => {
+  const container = document.createElement('div'),
+        label = document.createElement('label'),
+        inputContainer = document.createElement('div'),
+        input = document.createElement('textarea');
+
+  input.className = 'form-control';
+  input.id = 'list-description';
+  input.setAttribute('type', 'text');
+  input.setAttribute('placeholder', 'This trip is going to be the best!');
+  if (typeof list !== 'undefined') {
+    input.value = list.description;
+  }
+
+  inputContainer.className = 'col-sm-10';
+  inputContainer.appendChild(input);
+
+  label.className = 'col-sm-2 col-form-label';
+  label.setAttribute('for', 'list-description');
+  label.textContent = 'Description';
+
+  container.className = 'row mb-3';
+  container.appendChild(label);
+  container.appendChild(inputContainer);
+
+  return container;
+}
+
+const dateInput = list => {
   const container = document.createElement('div'),
         label = document.createElement('label'),
         inputContainer = document.createElement('div'),
@@ -34,6 +66,9 @@ const dateInput = () => {
   input.className = 'form-control';
   input.id = 'due-date';
   input.setAttribute('type', 'date');
+  if (typeof list !== 'undefined') {
+    input.value = format(Date.parse(list.date), 'yyyy-MM-dd');
+  }
 
   inputContainer.className = 'col-sm-10';
   inputContainer.appendChild(input);
@@ -49,7 +84,7 @@ const dateInput = () => {
   return container;
 }
 
-const priorityInput = () => {
+const priorityInput = list => {
   const container = document.createElement('div'),
         label = document.createElement('label'),
         options = ['low', 'half', 'high'];
@@ -71,6 +106,9 @@ const priorityInput = () => {
     input.setAttribute('type', 'radio');
     input.setAttribute('value', priority);
     input.setAttribute('name', 'priority');
+    if (typeof list !== 'undefined' && priority === list.priority) {
+      input.checked = true;
+    }
 
     icon.className = `bi bi-thermometer-${priority} h4`;
 
@@ -88,7 +126,7 @@ const priorityInput = () => {
   return container;
 }
 
-const groupSelect = () => {
+const groupSelect = list => {
   const container = document.createElement('div'),
         label = document.createElement('label'),
         inputContainer = document.createElement('div'),
@@ -101,6 +139,9 @@ const groupSelect = () => {
     const option = document.createElement('option');
     option.setAttribute('value', group.name);
     option.textContent = group.name;
+    if (typeof list !== 'undefined' && group.name === list.group) {
+      option.setAttribute('selected', 'selected');
+    }
     select.appendChild(option);
   })
 
@@ -118,7 +159,7 @@ const groupSelect = () => {
   return container;
 }
 
-const formBtns = () => {
+const formBtns = list => {
   const div = document.createElement('div'),
         cancelBtn = document.createElement('button'),
         submitBtn = document.createElement('button');
@@ -130,7 +171,7 @@ const formBtns = () => {
 
   submitBtn.id = 'submit-list';
   submitBtn.className = 'btn btn-success btn-submit-list';
-  submitBtn.textContent = 'Create List';
+  submitBtn.textContent = (typeof list === 'undefined') ? 'Create List' : 'Update List';
   submitBtn.setAttribute('type', 'submit');
 
   div.className = 'col-sm-10 d-flex btn-row';
@@ -140,16 +181,16 @@ const formBtns = () => {
   return div;
 }
 
-const buildListForm = () => {
+const buildListForm = list => {
   const form = document.createElement('form'),
         modalBody = document.createElement('div');
 
-  form.appendChild(textInput('input', 'Title', 'Summer Vacation'));
-  form.appendChild(textInput('textarea', 'Description', 'This trip is going to be the best!'));
-  form.appendChild(priorityInput());
-  form.appendChild(dateInput());
-  form.appendChild(groupSelect());
-  form.appendChild(formBtns());
+  form.appendChild(titleInput(list));
+  form.appendChild(descriptionInput(list));
+  form.appendChild(priorityInput(list));
+  form.appendChild(dateInput(list));
+  form.appendChild(groupSelect(list));
+  form.appendChild(formBtns(list));
 
   modalBody.className = 'modal-body';
   modalBody.appendChild(form);
@@ -157,13 +198,13 @@ const buildListForm = () => {
   return modalBody;
 }
 
-const buildModalHeader = () => {
+const buildModalHeader = list => {
   const modalHeader = document.createElement('div'),
         heading = document.createElement('h5'),
         button = document.createElement('button');
 
   heading.className = 'modal-title';
-  heading.textContent = 'New List';
+  heading.textContent = (typeof list === 'undefined') ? 'New List' : 'Edit List';
 
   button.id = 'close-list';
   button.className = 'btn-close';
@@ -176,13 +217,13 @@ const buildModalHeader = () => {
   return modalHeader;
 }
 
-const listModal = () => {
+const listModal = list => {
   const modal = document.createElement('div'),
         modalContent = document.createElement('div');
   
   modalContent.className = 'modal-content';
-  modalContent.appendChild(buildModalHeader());
-  modalContent.appendChild(buildListForm());
+  modalContent.appendChild(buildModalHeader(list));
+  modalContent.appendChild(buildListForm(list));
 
   modal.id = 'list-modal';
   modal.className = 'modal show';

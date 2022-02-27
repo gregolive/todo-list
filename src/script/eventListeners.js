@@ -9,8 +9,17 @@ import { newTodoInput, buildTodoItem } from './listView.js';
 
 // List functions
 
-const openListModal = () => {
+const openNewListModal = () => {
   document.body.appendChild(listModal());
+  addListModalEventListeners();
+}
+
+const openEditListModal = () => {
+  const listTitle = document.querySelector('h1').textContent,
+        groupName = document.querySelector('.list-group').textContent,
+        list = findListFromLocalStorage(listTitle, groupName);
+
+  document.body.appendChild(listModal(list));
   addListModalEventListeners();
 }
 
@@ -106,7 +115,7 @@ const deleteList = () => {
 
 const addDefaultEventListeners = () => {
   // Open Modals
-  document.getElementById('new-list').addEventListener('click', openListModal);
+  document.getElementById('new-list').addEventListener('click', openNewListModal);
   document.getElementById('new-group').addEventListener('click', openGroupModal);
 
   // Sidebar Lists
@@ -121,7 +130,8 @@ const addDefaultEventListeners = () => {
     document.querySelectorAll('.form-check-input').forEach(checkbox => {
       checkbox.addEventListener('change', updateTodoComplete);
     })
-    document.getElementById('delete-list').addEventListener('click', deleteList)
+    document.getElementById('delete-list').addEventListener('click', deleteList);
+    document.getElementById('edit-list').addEventListener('click', openEditListModal);
   }
 }
 
