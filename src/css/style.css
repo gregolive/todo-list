@@ -102,6 +102,11 @@ footer i {
   top: 0.25rem;
 }
 
+.img-large {
+  max-height: min(50vw, 350px);
+  width: auto;
+}
+
 /* LIST MODAL */
 
 .modal {

@@ -1,18 +1,17 @@
 import navbar from './navbar.js';
 import sidebar from './sidebar.js';
-import { listView 
-} from './listView.js';
+import { listView } from './listView.js';
 import footer from './footer.js';
 import newListModal from './listModal';
 import newGroupModal from './groupModal';
-import { fetchGroups } from './objectControl.js';
+import { fetchGroups, firstAvaliableList } from './objectControl.js';
 import addEventListeners from './eventListeners.js';
 
 const main = list => {
   const main = document.createElement('main'),
         groups = fetchGroups(),
-        displayList = list || groups[0].lists[0];
-
+        displayList = list || firstAvaliableList(groups);
+  console.log(displayList);
   main.id = 'main';
   main.className = 'd-flex flex-row';
   main.appendChild(sidebar(groups));

@@ -1,3 +1,19 @@
+import cactus from '../img/cactus.png';
+
+// Show List
+const showList = list => {
+  const container = document.createElement('div');
+  
+  container.className = 'container-fluid position-relative m-5';
+  container.appendChild(buildTitle(list.title, list.priority));
+  container.appendChild(buildDueDate(list.date));
+  container.appendChild(buildDescription(list.description));
+  container.appendChild(buildList(list.todo));
+  container.appendChild(dropdownButton());
+
+  return container;
+}
+
 // Title
 const buildTitle = (title, priority) => {
   const container = document.createElement('div'),
@@ -33,7 +49,7 @@ const buildDescription = (description) => {
   return paragraph;
 }
 
-// Todo list
+// Todo lists
 const buildList = (todo) => {
   const container = document.createElement('div');
 
@@ -41,6 +57,14 @@ const buildList = (todo) => {
   container.appendChild(buildListForm(todo));
 
   return container;
+}
+
+const buildListHeader = () => {
+  const header = document.createElement('h2');
+  header.classList = 'h5 border-bottom pb-1 pt-2';
+  header.textContent = 'TO DO';
+
+  return header;
 }
 
 const buildListForm = (todo) => {
@@ -102,14 +126,6 @@ const newTodoInput = () => {
   return div;
 }
 
-const buildListHeader = () => {
-  const header = document.createElement('h2');
-  header.classList = 'h5 border-bottom pb-1 pt-2';
-  header.textContent = 'TO DO';
-
-  return header;
-}
-
 // Dropdown button
 const dropdownButton = () => {
   const div = document.createElement('div'),
@@ -152,18 +168,29 @@ const buildMenuLink = (name) => {
   return item;
 }
 
+// No List View
+const noList = () => {
+  const container = document.createElement('div'),
+        img = document.createElement('img'),
+        heading = document.createElement('h2');
+
+  heading.className = 'h4 text-center';
+  heading.textContent = "You haven't made any lists yet. Make one now from above!"
+  
+  img.src = cactus;
+  img.alt = 'sad cactus';
+  img.className = 'img-large mb-4';
+  
+  container.className = 'container-fluid d-flex flex-column align-items-center justify-content-center m-5';
+  container.appendChild(img);
+  container.appendChild(heading);
+
+  return container
+}
+
 // Completed display
 const listView = list => {
-  const container = document.createElement('div');
-  
-  container.className = 'container-fluid position-relative m-5';
-  container.appendChild(buildTitle(list.title, list.priority));
-  container.appendChild(buildDueDate(list.date));
-  container.appendChild(buildDescription(list.description));
-  container.appendChild(buildList(list.todo));
-  container.appendChild(dropdownButton());
-
-  return container;
+  return (typeof list !== 'undefined') ? showList(list) : noList();
 }
 
 export { listView, newTodoInput };
