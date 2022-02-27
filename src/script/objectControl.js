@@ -2,7 +2,8 @@ import List from './list.js';
 
 const firstAvaliableList = groups => {
   for(const group of groups) {
-    if (group.lists !== []) {
+    console.log(group.lists);
+    if (group.lists.length > 0) {
       return group.lists[0];
     }
   }
