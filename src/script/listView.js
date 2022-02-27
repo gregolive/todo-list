@@ -7,6 +7,7 @@ const showList = list => {
   container.className = 'container-fluid position-relative m-5';
   container.appendChild(buildTitle(list.title, list.priority));
   container.appendChild(buildDueDate(list.date));
+  container.appendChild(buildGroup(list.group));
   container.appendChild(buildDescription(list.description));
   container.appendChild(buildList(list.todo));
   container.appendChild(dropdownButton());
@@ -33,15 +34,24 @@ const buildTitle = (title, priority) => {
 }
 
 // Due Date
-const buildDueDate = (date) => {
+const buildDueDate = date => {
   const small = document.createElement('small');
   small.textContent = `Due: ${date}`;
 
   return small;
 }
 
+// Group (hidden)
+const buildGroup = group => {
+  const text = document.createElement('p');
+  text.className = 'list-group d-none'
+  text.textContent = group;
+
+  return text;
+}
+
 // Description
-const buildDescription = (description) => {
+const buildDescription = description => {
   const paragraph = document.createElement('p');
   paragraph.className = 'font-weight-light pt-3 ';
   paragraph.textContent = description;
@@ -50,7 +60,7 @@ const buildDescription = (description) => {
 }
 
 // Todo lists
-const buildList = (todo) => {
+const buildList = todo => {
   const container = document.createElement('div');
 
   container.appendChild(buildListHeader());
@@ -67,33 +77,37 @@ const buildListHeader = () => {
   return header;
 }
 
-const buildListForm = (todo) => {
+const buildListForm = todo => {
   const form = document.createElement('form');
 
   todo.forEach((task, index) => {
-    const checkboxDiv = document.createElement('div'),
-          input = document.createElement('input'),
-          label = document.createElement('label');
-
-    input.id = `check${index}`;
-    input.className = 'form-check-input';
-    input.type = 'checkbox';
-
-    label.className = 'form-check-label';
-    label.setAttribute('for', `check${index}`);
-    label.textContent = task;
-    
-    checkboxDiv.className = 'form-check';
-    checkboxDiv.append(input);
-    checkboxDiv.append(label);
-
-    form.appendChild(checkboxDiv);
+    form.appendChild(buildTodoItem(task, index));
   });
   
   form.id = 'todo-form';
   form.appendChild(newTodoLink());
 
   return form;
+}
+
+const buildTodoItem = (task, index) => {
+  const checkboxDiv = document.createElement('div'),
+          input = document.createElement('input'),
+          label = document.createElement('label');
+
+  input.id = `check${index}`;
+  input.className = 'form-check-input';
+  input.type = 'checkbox';
+
+  label.className = 'form-check-label';
+  label.setAttribute('for', `check${index}`);
+  label.textContent = task;
+  
+  checkboxDiv.className = 'form-check';
+  checkboxDiv.append(input);
+  checkboxDiv.append(label);
+
+  return checkboxDiv;
 }
 
 const newTodoLink = () => {
@@ -105,6 +119,7 @@ const newTodoLink = () => {
   return link;
 }
 
+// Todo input (opens on newTodoLink click)
 const newTodoInput = () => {
   const div = document.createElement('div'),
         input = document.createElement('input'),
@@ -114,10 +129,9 @@ const newTodoInput = () => {
   input.setAttribute('type', 'text');
   input.setAttribute('placeholder', 'Book flights');
 
-  button.id = 'submit-todo';
-  button.className = 'btn btn-outline-secondary';
+  button.className = 'btn btn-outline-secondary submit-todo';
   button.textContent = 'Add';
-  button.setAttribute('type', 'button');
+  button.setAttribute('type', 'submit');
 
   div.classList = 'input-group mt-2';
   div.appendChild(input);

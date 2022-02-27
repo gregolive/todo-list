@@ -1,6 +1,6 @@
 import List from './list.js';
 import Group from './group.js';
-import { findListFromLocalStorage } from './objectControl.js';
+import { findListFromLocalStorage, addTodoToList } from './objectControl.js';
 import { updateDashboard } from './dashboard.js';
 import { newTodoInput } from './listView.js';
 
@@ -52,8 +52,8 @@ const submitGroupForm = () => {
 // Sidebar list view function
 
 const viewList = e => {
-  const listTitle = e.target.textContent.trim(),
-        groupName = e.target.closest('.collapse').previousSibling.textContent.trim();
+  const listTitle = e.target.textContent,
+        groupName = e.target.closest('.collapse').previousSibling.textContent;
   updateDashboard(findListFromLocalStorage(listTitle, groupName));
 }
 
@@ -62,9 +62,19 @@ const viewList = e => {
 const addTodoInput = e => {
   const form = document.getElementById('todo-form');
   form.insertBefore(newTodoInput(), e.target);
+  addTodoEventListener();
+  e.target.remove();
 }
 
-// Event Listeners
+const addTodo = e => {
+  const todo = e.target.previousSibling.value,
+        listTitle = document.querySelector('h1').textContent,
+        groupName = document.querySelector('.list-group').textContent;
+
+  addTodoToList(todo, listTitle, groupName);
+}
+
+// Default Event Listeners
 
 const addEventListeners = () => {
   // New List Modal
@@ -89,6 +99,12 @@ const addEventListeners = () => {
   if (newTodo !== null) {
     newTodo.addEventListener('click', addTodoInput);
   }
+}
+
+// Dynamic Todo Event Listeners
+
+const addTodoEventListener = () => {
+  document.querySelector('.submit-todo').addEventListener('click', addTodo);
 }
 
 export default addEventListeners;

@@ -30,14 +30,14 @@ const buildGroupHeader = group => {
   const groupHeader = document.createElement('button'),
         icon = document.createElement('i');
 
-  icon.className = 'bi bi-bookmark-fill';
+  icon.className = 'bi bi-bookmark-fill me-2';
   icon.style.color = group.color;
 
   groupHeader.className = 'btn btn-toggle align-items-center rounded collapsed';
   groupHeader.setAttribute('data-bs-toggle', 'collapse');
   groupHeader.setAttribute('data-bs-target', `#${group.name.replace(/\s+/g, '-').toLowerCase()}-collapse`);
   groupHeader.appendChild(icon);
-  groupHeader.innerHTML += ` ${group.name}`;
+  groupHeader.innerHTML += group.name;
 
   return groupHeader;
 }
@@ -67,12 +67,12 @@ const buildNewGroupBtn = () => {
         button = document.createElement('button'),
         icon = document.createElement('i');
   
-  icon.className = 'bi bi-bookmark-plus-fill';
+  icon.className = 'bi bi-bookmark-plus-fill me-2';
 
   button.id = 'new-group';
   button.className = 'btn align-items-center rounded';
   button.appendChild(icon);
-  button.innerHTML += ' New Group';
+  button.innerHTML += 'New Group';
 
   btnDiv.className = 'mb-1 border-top my-3';
   btnDiv.appendChild(button);

@@ -9,6 +9,7 @@ export default class List {
     this.date = format(parseISO(date), 'MMMM d, y');
     this.description = description;
     this.todo = todo;
+    this.group = group;
     this.addToGroup(group);
   }
 

@@ -1,15 +1,16 @@
 import { format } from 'date-fns';
 import List from './list.js';
 
+// Find first list in first non-empty group
 const firstAvaliableList = groups => {
-  for(const group of groups) {
-    console.log(group.lists);
+  for (const group of groups) {
     if (group.lists.length > 0) {
       return group.lists[0];
     }
   }
 }
 
+// Find list in local storage
 const findListFromLocalStorage = (listTitle, groupName) => {
   const group = JSON.parse(localStorage.getItem(groupName));
   const listIndex = group.lists.findIndex(list => list.title === listTitle);
@@ -17,6 +18,22 @@ const findListFromLocalStorage = (listTitle, groupName) => {
   return group.lists[listIndex];
 }
 
+// Add todo to list in group
+const addTodoToList = (task, listTitle, groupName) => {
+  const group = JSON.parse(localStorage.getItem(groupName)),
+        listIndex = group.lists.findIndex(list => list.title === listTitle),
+        list = group.lists[listIndex];
+  
+  list.todo.push(task);
+  localStorage.setItem(group.name, JSON.stringify(group));
+}
+
+// Update group list in local storage
+const updateGroupList = (list, groupName) => {
+  
+}
+
+// Default list for new session
 const buildDefaultList = () => {
   new List( 'My First List',
             'low',
@@ -27,6 +44,7 @@ const buildDefaultList = () => {
           );
 }
 
+// All groups saved to local storage
 const buildGroupsFromLocalStorage = () => {
   let groups = [],
       keys = Object.keys(localStorage),
@@ -42,6 +60,7 @@ const buildGroupsFromLocalStorage = () => {
   return groups;
 }
 
+// Find all groups, if none create default list
 const fetchGroups = () => {
   if (localStorage.length === 0) {
     buildDefaultList();
@@ -50,4 +69,4 @@ const fetchGroups = () => {
   return buildGroupsFromLocalStorage();
 }
 
-export { findListFromLocalStorage, buildGroupsFromLocalStorage, fetchGroups, firstAvaliableList };
+export { findListFromLocalStorage, buildGroupsFromLocalStorage, fetchGroups, firstAvaliableList, addTodoToList };
