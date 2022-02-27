@@ -29,9 +29,16 @@ const addTodoToList = (task, listTitle, groupName) => {
   localStorage.setItem(group.name, JSON.stringify(group));
 }
 
-// Update group list in local storage
-const updateGroupList = (list, groupName) => {
+// Update todo complete
+const changeTodoStatus = (todoTask, listTitle, groupName) => {
+  const group = JSON.parse(localStorage.getItem(groupName)),
+        listIndex = group.lists.findIndex(list => list.title === listTitle),
+        list = group.lists[listIndex],
+        todoIndex = list.todo.findIndex(item => item.task === todoTask),
+        todo = list.todo[todoIndex];
   
+  todo.complete = (todo.complete === true) ? false : true;
+  localStorage.setItem(group.name, JSON.stringify(group));
 }
 
 // Default list for new session
@@ -70,4 +77,4 @@ const fetchGroups = () => {
   return buildGroupsFromLocalStorage();
 }
 
-export { findListFromLocalStorage, buildGroupsFromLocalStorage, fetchGroups, firstAvaliableList, addTodoToList };
+export { findListFromLocalStorage, buildGroupsFromLocalStorage, fetchGroups, firstAvaliableList, addTodoToList, changeTodoStatus };
