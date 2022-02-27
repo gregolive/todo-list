@@ -102,7 +102,7 @@ const buildModalHeader = () => {
   return modalHeader;
 }
 
-const newGroupModal = () => {
+const groupModal = () => {
   const modal = document.createElement('div'),
         modalContent = document.createElement('div');
   
@@ -110,11 +110,11 @@ const newGroupModal = () => {
   modalContent.appendChild(buildModalHeader());
   modalContent.appendChild(buildGroupForm());
 
-  modal.id = 'new-group-modal';
-  modal.className = 'modal';
+  modal.id = 'group-modal';
+  modal.className = 'modal show';
   modal.appendChild(modalContent);
 
   return modal;
 }
 
-export default newGroupModal;
+export default groupModal;

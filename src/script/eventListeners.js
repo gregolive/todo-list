@@ -1,6 +1,8 @@
 import List from './list.js';
 import Group from './group.js';
 import Todo from './todo.js';
+import listModal from './listModal';
+import groupModal from './groupModal';
 import { findListFromLocalStorage, addTodoToList, changeTodoStatus, removeListFromGroup } from './objectControl.js';
 import { updateDashboard } from './dashboard.js';
 import { newTodoInput, buildTodoItem } from './listView.js';
@@ -8,11 +10,12 @@ import { newTodoInput, buildTodoItem } from './listView.js';
 // List functions
 
 const openListModal = () => {
-  document.getElementById('new-list-modal').classList.add('show');
+  document.body.appendChild(listModal());
+  addListModalEventListeners();
 }
 
 const closeListModal = () => {
-  document.getElementById('new-list-modal').classList.remove('show');
+  document.getElementById('list-modal').remove();
 }
 
 const submitListForm = () => {
@@ -36,11 +39,12 @@ const submitListForm = () => {
 // Group functions 
 
 const openGroupModal = () => {
-  document.getElementById('new-group-modal').classList.add('show');
+  document.body.appendChild(groupModal());
+  addGroupModalEventListeners();
 }
 
 const closeGroupModal = () => {
-  document.getElementById('new-group-modal').classList.remove('show');
+  document.getElementById('group-modal').remove();
 }
 
 const submitGroupForm = () => {
@@ -98,20 +102,12 @@ const deleteList = () => {
   window.location.reload();
 }
 
-// Default Event Listeners
+// Event Listeners
 
-const addEventListeners = () => {
-  // New List Modal
+const addDefaultEventListeners = () => {
+  // Open Modals
   document.getElementById('new-list').addEventListener('click', openListModal);
-  document.getElementById('close-list').addEventListener('click', closeListModal);
-  document.getElementById('cancel-list').addEventListener('click', closeListModal);
-  document.getElementById('submit-list').addEventListener('click', submitListForm);
-
-  // New Group Modal
   document.getElementById('new-group').addEventListener('click', openGroupModal);
-  document.getElementById('close-group').addEventListener('click', closeGroupModal);
-  document.getElementById('cancel-group').addEventListener('click', closeGroupModal);
-  document.getElementById('submit-group').addEventListener('click', submitGroupForm);
 
   // Sidebar Lists
   document.querySelectorAll('.sidebar-link').forEach(link => {
@@ -129,10 +125,24 @@ const addEventListeners = () => {
   }
 }
 
+// New List Modal
+const addListModalEventListeners = () => {
+  document.getElementById('close-list').addEventListener('click', closeListModal);
+  document.getElementById('cancel-list').addEventListener('click', closeListModal);
+  document.getElementById('submit-list').addEventListener('click', submitListForm);
+}
+
+// New Group Modal
+const addGroupModalEventListeners = () => {
+  document.getElementById('close-group').addEventListener('click', closeGroupModal);
+  document.getElementById('cancel-group').addEventListener('click', closeGroupModal);
+  document.getElementById('submit-group').addEventListener('click', submitGroupForm);
+}
+
 // Dynamic Todo Event Listeners
 
 const addTodoEventListener = () => {
   document.querySelector('.submit-todo').addEventListener('click', addTodo);
 }
 
-export default addEventListeners;
+export default addDefaultEventListeners;

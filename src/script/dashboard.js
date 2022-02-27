@@ -2,8 +2,8 @@ import navbar from './navbar.js';
 import sidebar from './sidebar.js';
 import { listView } from './listView.js';
 import footer from './footer.js';
-import newListModal from './listModal';
-import newGroupModal from './groupModal';
+import listModal from './listModal';
+import groupModal from './groupModal';
 import { fetchGroups, firstAvaliableList } from './objectControl.js';
 import addEventListeners from './eventListeners.js';
 
@@ -32,8 +32,6 @@ const dashboard = () => {
   document.body.appendChild(navbar());
   document.body.appendChild(main());
   document.body.appendChild(footer());
-  document.body.appendChild(newListModal());
-  document.body.appendChild(newGroupModal());
   addEventListeners();
 }
 

@@ -176,7 +176,7 @@ const buildModalHeader = () => {
   return modalHeader;
 }
 
-const newListModal = () => {
+const listModal = () => {
   const modal = document.createElement('div'),
         modalContent = document.createElement('div');
   
@@ -184,11 +184,11 @@ const newListModal = () => {
   modalContent.appendChild(buildModalHeader());
   modalContent.appendChild(buildListForm());
 
-  modal.id = 'new-list-modal';
-  modal.className = 'modal';
+  modal.id = 'list-modal';
+  modal.className = 'modal show';
   modal.appendChild(modalContent);
 
   return modal;
 }
 
-export default newListModal;
+export default listModal;
