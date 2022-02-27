@@ -11,7 +11,7 @@ const main = list => {
   const main = document.createElement('main'),
         groups = fetchGroups(),
         displayList = list || firstAvaliableList(groups);
-  console.log(displayList);
+
   main.id = 'main';
   main.className = 'd-flex flex-row';
   main.appendChild(sidebar(groups));

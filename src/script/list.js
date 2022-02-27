@@ -1,3 +1,4 @@
+import { parseISO, format } from 'date-fns';
 import Group from './group.js';
 import { buildGroupsFromLocalStorage } from './objectControl.js'
 
@@ -5,7 +6,7 @@ export default class List {
   constructor(title, priority, date, description, group, todo = []) {
     this.title = title;
     this.priority = priority;
-    this.date = date;
+    this.date = format(parseISO(date), 'MMMM d, y');
     this.description = description;
     this.todo = todo;
     this.addToGroup(group);

@@ -86,8 +86,7 @@ const addEventListeners = () => {
 
   // List View (only if there is a list to display)
   const newTodo = document.getElementById('new-todo');
-  console.log(newTodo !== null);
-  if (newTodo) {
+  if (newTodo !== null) {
     newTodo.addEventListener('click', addTodoInput);
   }
 }
