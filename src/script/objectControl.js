@@ -88,9 +88,9 @@ const buildGroupsFromLocalStorage = () => {
   while ( i-- ) {
     groups.push( JSON.parse(localStorage.getItem(keys[i])) );
   }
-  // Sort by date created
+  // Sort alphabetically by name
   groups.sort(function(a,b){
-    return new Date(a.created) - new Date(b.created);
+    return a.name.localeCompare(b.name);
   });
   return groups;
 }
