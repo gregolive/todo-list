@@ -59,13 +59,18 @@ const buildTodo = todoSections => {
   return todoList;
 }
 
-// Remove List From Group
+// Remove list from group
 const removeListFromGroup = (listTitle, groupName) => {
   const group = JSON.parse(localStorage.getItem(groupName)),
         listIndex = group.lists.findIndex(list => list.title === listTitle);
 
   group.lists.splice(listIndex, 1);
   saveGroup(group);
+}
+
+// Remove group from local storage
+const removeGroup = groupName => {
+  localStorage.removeItem(groupName);
 }
 
 // Default list for new session
@@ -104,4 +109,4 @@ const fetchGroups = () => {
   return buildGroupsFromLocalStorage();
 }
 
-export { findListFromLocalStorage, buildGroupsFromLocalStorage, fetchGroups, firstAvaliableList, addTodoToList, changeTodoStatus, removeListFromGroup, buildTodo };
+export { findListFromLocalStorage, buildGroupsFromLocalStorage, fetchGroups, firstAvaliableList, addTodoToList, changeTodoStatus, removeListFromGroup, buildTodo, removeGroup };

@@ -19,9 +19,10 @@ const buildGroup = groupObj => {
   collapseDiv.id = `${groupObj.name.replace(/\s+/g, '-').toLowerCase()}-collapse`;
   collapseDiv.appendChild(buildGroupLists(groupObj.lists));
 
-  group.className = 'mb-1';
+  group.className = 'mb-1 position-relative';
   group.appendChild(buildGroupHeader(groupObj));
   group.appendChild(collapseDiv);
+  group.appendChild(dropdownButton());
 
   return group;
 }
@@ -61,20 +62,62 @@ const buildGroupLists = (groupLists) => {
   return htmlList;
 }
 
+// Dropdown button
+const dropdownButton = () => {
+  const div = document.createElement('div'),
+        button = document.createElement('a'),
+        icon = document.createElement('i');
+
+  icon.className = 'bi bi-three-dots fs-6 text-secondary';
+
+  button.className = 'edit-button';
+  button.setAttribute('data-bs-toggle', 'dropdown');
+  button.setAttribute('role', 'button');
+  button.appendChild(icon);
+
+  div.className = 'dropdown pt-1';
+  div.appendChild(button);
+  div.appendChild(menuLinks());
+
+  return div;
+}
+
+const menuLinks = () => {
+  const list = document.createElement('ul');
+  list.className = 'dropdown-menu';
+  list.appendChild(buildMenuLink('Edit'));
+  list.appendChild(buildMenuLink('Delete'));
+
+  return list;      
+}
+
+const buildMenuLink = (name) => {
+  const item = document.createElement('li'),
+        link = document.createElement('a');
+
+  link.className = `${name.toLowerCase()}-group dropdown-item`;
+  link.textContent = name;
+
+  item.appendChild(link);
+
+  return item;
+}
+
+
 // Add new group button
 const buildNewGroupBtn = () => {
   const btnDiv = document.createElement('div'),
         button = document.createElement('button'),
-        icon = document.createElement('i');
+        newIcon = document.createElement('i');
   
-  icon.className = 'bi bi-bookmark-plus-fill me-2';
+  newIcon.className = 'bi bi-bookmark-plus-fill me-2';
 
   button.id = 'new-group';
   button.className = 'btn align-items-center rounded';
-  button.appendChild(icon);
+  button.appendChild(newIcon);
   button.innerHTML += 'New Group';
 
-  btnDiv.className = 'mb-1 border-top my-3';
+  btnDiv.className = 'border-top mb-1 mt-3';
   btnDiv.appendChild(button);
 
   return btnDiv;

@@ -80,9 +80,11 @@ const buildListHeader = () => {
 const buildListForm = todo => {
   const form = document.createElement('form');
 
-  todo.forEach((item, index) => {
-    form.appendChild(buildTodoItem(item, index));
-  });
+  if (todo.length > 0) {
+    todo.forEach((item, index) => {
+      form.appendChild(buildTodoItem(item, index));
+    });
+  }
   
   form.id = 'todo-form';
   form.appendChild(newTodoLink());

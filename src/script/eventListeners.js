@@ -3,11 +3,11 @@ import Group from './group.js';
 import Todo from './todo.js';
 import listModal from './listModal';
 import groupModal from './groupModal';
-import { findListFromLocalStorage, addTodoToList, changeTodoStatus, removeListFromGroup, buildTodo } from './objectControl.js';
+import { findListFromLocalStorage, addTodoToList, changeTodoStatus, removeListFromGroup, buildTodo, removeGroup } from './objectControl.js';
 import { updateDashboard } from './dashboard.js';
 import { newTodoInput, buildTodoItem } from './listView.js';
 
-// List functions
+// List Modal functions
 
 const openNewListModal = () => {
   document.body.appendChild(listModal());
@@ -57,8 +57,16 @@ const editListForm = () => {
 
 // Group functions 
 
-const openGroupModal = () => {
+const openNewGroupModal = () => {
   document.body.appendChild(groupModal());
+  addGroupModalEventListeners();
+}
+
+const openEditGroupModal = e => {
+  const groupName = e.target.closest('.dropdown').previousSibling.previousSibling.textContent,
+        group = JSON.parse(localStorage.getItem(groupName));
+
+  document.body.appendChild(groupModal(group));
   addGroupModalEventListeners();
 }
 
@@ -66,11 +74,19 @@ const closeGroupModal = () => {
   document.getElementById('group-modal').remove();
 }
 
-const submitGroupForm = () => {
+const submitGroupForm = (lists = []) => {
   const name = document.getElementById('group-name').value,
         color = document.getElementById('color').value;
   
-  new Group(name, color, []);
+  new Group(name, color, lists);
+}
+
+const editGroupForm = e => {
+  const groupName = document.querySelector('.group-info').textContent,
+        lists = JSON.parse(localStorage.getItem(groupName)).lists;
+
+  removeGroup(groupName);
+  submitGroupForm(lists);
 }
 
 // Sidebar list view function
@@ -126,11 +142,17 @@ const deleteList = () => {
 const addDefaultEventListeners = () => {
   // Open Modals
   document.getElementById('new-list').addEventListener('click', openNewListModal);
-  document.getElementById('new-group').addEventListener('click', openGroupModal);
+  document.getElementById('new-group').addEventListener('click', openNewGroupModal);
 
   // Sidebar Lists
   document.querySelectorAll('.sidebar-link').forEach(link => {
     link.addEventListener('click', viewList);
+  });
+  document.querySelectorAll('.edit-group').forEach(btn => {
+    btn.addEventListener('click', openEditGroupModal);
+  });
+  document.querySelectorAll('.delete-group').forEach(btn => {
+    
   });
 
   // List View (only if there is a list to display)
@@ -154,15 +176,17 @@ const addListModalEventListeners = () => {
   } else {
     document.getElementById('update-list').addEventListener('click', editListForm);
   }
-  
-  
 }
 
 // New Group Modal
 const addGroupModalEventListeners = () => {
   document.getElementById('close-group').addEventListener('click', closeGroupModal);
   document.getElementById('cancel-group').addEventListener('click', closeGroupModal);
-  document.getElementById('submit-group').addEventListener('click', submitGroupForm);
+  if (document.querySelector('.modal-title').textContent === 'New Group') {
+    document.getElementById('submit-group').addEventListener('click', submitGroupForm);
+  } else {
+    document.getElementById('update-group').addEventListener('click', editGroupForm);
+  }
 }
 
 // Dynamic Todo Event Listeners
