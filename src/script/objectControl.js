@@ -46,6 +46,19 @@ const changeTodoStatus = (todoTask, listTitle, groupName) => {
   saveGroup(group);
 }
 
+// Rebuild todos
+const buildTodo = todoSections => {
+  const todoList = [];
+  todoSections.forEach(section => {
+    const complete = (section.firstChild.checked) ? true : false,
+          task = section.firstChild.nextSibling.textContent;
+ 
+    todoList.push(new Todo(task, complete));
+  });
+  console.log(todoList);
+  return todoList;
+}
+
 // Remove List From Group
 const removeListFromGroup = (listTitle, groupName) => {
   const group = JSON.parse(localStorage.getItem(groupName)),
@@ -91,4 +104,4 @@ const fetchGroups = () => {
   return buildGroupsFromLocalStorage();
 }
 
-export { findListFromLocalStorage, buildGroupsFromLocalStorage, fetchGroups, firstAvaliableList, addTodoToList, changeTodoStatus, removeListFromGroup };
+export { findListFromLocalStorage, buildGroupsFromLocalStorage, fetchGroups, firstAvaliableList, addTodoToList, changeTodoStatus, removeListFromGroup, buildTodo };

@@ -3,7 +3,7 @@ import Group from './group.js';
 import Todo from './todo.js';
 import listModal from './listModal';
 import groupModal from './groupModal';
-import { findListFromLocalStorage, addTodoToList, changeTodoStatus, removeListFromGroup } from './objectControl.js';
+import { findListFromLocalStorage, addTodoToList, changeTodoStatus, removeListFromGroup, buildTodo } from './objectControl.js';
 import { updateDashboard } from './dashboard.js';
 import { newTodoInput, buildTodoItem } from './listView.js';
 
@@ -27,7 +27,7 @@ const closeListModal = () => {
   document.getElementById('list-modal').remove();
 }
 
-const submitListForm = () => {
+const submitListForm = (todo = []) => {
   const title = document.getElementById('list-title').value,
         description = document.getElementById('list-description').value,
         date = document.getElementById('due-date').value,
@@ -42,7 +42,17 @@ const submitListForm = () => {
     }
   });
 
-  new List(title, priority, date, description, group);
+  new List(title, priority, date, description, group, todo);
+}
+
+const editListForm = () => {
+  const listTitle = document.querySelector('h1').textContent,
+        groupName = document.querySelector('.list-group').textContent,
+        todoSections = document.querySelectorAll('.todo-section'),
+        todo = buildTodo(todoSections);
+
+  removeListFromGroup(listTitle, groupName);
+  submitListForm(todo);
 }
 
 // Group functions 
@@ -139,7 +149,13 @@ const addDefaultEventListeners = () => {
 const addListModalEventListeners = () => {
   document.getElementById('close-list').addEventListener('click', closeListModal);
   document.getElementById('cancel-list').addEventListener('click', closeListModal);
-  document.getElementById('submit-list').addEventListener('click', submitListForm);
+  if (document.querySelector('.modal-title').textContent === 'New List') {
+    document.getElementById('submit-list').addEventListener('click', submitListForm);
+  } else {
+    document.getElementById('update-list').addEventListener('click', editListForm);
+  }
+  
+  
 }
 
 // New Group Modal

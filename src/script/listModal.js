@@ -169,9 +169,14 @@ const formBtns = list => {
   cancelBtn.textContent = 'Cancel';
   cancelBtn.setAttribute('type', 'button');
 
-  submitBtn.id = 'submit-list';
+  if (typeof list === 'undefined') {
+    submitBtn.id = 'submit-list';
+    submitBtn.textContent = 'Create List';
+  } else {
+    submitBtn.id = 'update-list';
+    submitBtn.textContent = 'Update List';
+  }
   submitBtn.className = 'btn btn-success btn-submit-list';
-  submitBtn.textContent = (typeof list === 'undefined') ? 'Create List' : 'Update List';
   submitBtn.setAttribute('type', 'submit');
 
   div.className = 'col-sm-10 d-flex btn-row';

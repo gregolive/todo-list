@@ -106,7 +106,7 @@ const buildTodoItem = (todo, index) => {
   label.setAttribute('for', `check${index}`);
   label.textContent = todo.task;
   
-  checkboxDiv.className = 'form-check';
+  checkboxDiv.className = 'form-check todo-section';
   checkboxDiv.append(input);
   checkboxDiv.append(label);
 
