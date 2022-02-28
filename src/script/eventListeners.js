@@ -95,6 +95,12 @@ const editGroupForm = e => {
   submitGroupForm(lists);
 }
 
+const deleteGroup = e => {
+  const groupName = e.target.closest('.dropdown').previousSibling.previousSibling.textContent;
+  removeGroup(groupName);
+  window.location.reload();
+}
+
 // Sidebar list view function
 
 const viewList = e => {
@@ -154,11 +160,11 @@ const addDefaultEventListeners = () => {
   document.querySelectorAll('.sidebar-link').forEach(link => {
     link.addEventListener('click', viewList);
   });
+  document.querySelectorAll('.delete-group').forEach(btn => {
+    btn.addEventListener('click', deleteGroup);
+  });
   document.querySelectorAll('.edit-group').forEach(btn => {
     btn.addEventListener('click', openEditGroupModal);
-  });
-  document.querySelectorAll('.delete-group').forEach(btn => {
-    
   });
 
   // List View (only if there is a list to display)
