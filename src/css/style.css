@@ -62,6 +62,18 @@ a.primary-color:hover {
   color: var(--secondary-color);
 }
 
+.group-dropdown {
+  transition: 0.25s;
+}
+
+.group-list .group-dropdown {
+  opacity: 0;
+}
+
+.group-list:hover .group-dropdown {
+  opacity: 1;
+}
+
 /* FOOTER */
 
 footer {

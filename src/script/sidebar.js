@@ -21,7 +21,7 @@ const buildGroup = groupObj => {
     collapseDiv.appendChild(buildGroupLists(groupObj.lists));
   }
 
-  group.className = 'mb-1 position-relative';
+  group.className = 'group-list mb-1 position-relative';
   group.appendChild(buildGroupHeader(groupObj));
   group.appendChild(collapseDiv);
   group.appendChild(dropdownButton());
@@ -77,7 +77,7 @@ const dropdownButton = () => {
   button.setAttribute('role', 'button');
   button.appendChild(icon);
 
-  div.className = 'dropdown pt-1';
+  div.className = 'dropdown group-dropdown pt-1';
   div.appendChild(button);
   div.appendChild(menuLinks());
 
