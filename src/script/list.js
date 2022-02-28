@@ -14,10 +14,9 @@ export default class List {
   }
 
   addToGroup(name) {
-    let groups = buildGroupsFromLocalStorage();
-    if (groups.length > 0) {
-      let index = groups.findIndex((group) => group.name === name);
-      const target = groups[index];
+    let target = JSON.parse(localStorage.getItem(name));
+    if (typeof target !== 'undefined') {
+      console.log(target.lists);
       target.lists.push(this);
       new Group(target.name, target.color, target.lists);
     } else {

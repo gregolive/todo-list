@@ -74,10 +74,14 @@ const closeGroupModal = () => {
   document.getElementById('group-modal').remove();
 }
 
-const submitGroupForm = (lists = []) => {
+const submitGroupForm = lists => {
+  newGroup();
+}
+
+const newGroup = (lists = []) => {
   const name = document.getElementById('group-name').value,
         color = document.getElementById('color').value;
-  
+  console.log(lists)
   new Group(name, color, lists);
 }
 
@@ -92,7 +96,7 @@ const editGroupForm = e => {
       list.group = newGroupName;
     });
   }
-  submitGroupForm(lists);
+  newGroup(lists);
 }
 
 const deleteGroup = e => {
