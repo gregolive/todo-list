@@ -17,7 +17,9 @@ const buildGroup = groupObj => {
   
   collapseDiv.className = 'collapse show';
   collapseDiv.id = `${groupObj.name.replace(/\s+/g, '-').toLowerCase()}-collapse`;
-  collapseDiv.appendChild(buildGroupLists(groupObj.lists));
+  if (groupObj.lists.length > 0) {
+    collapseDiv.appendChild(buildGroupLists(groupObj.lists));
+  }
 
   group.className = 'mb-1 position-relative';
   group.appendChild(buildGroupHeader(groupObj));
@@ -43,7 +45,7 @@ const buildGroupHeader = group => {
   return groupHeader;
 }
 
-const buildGroupLists = (groupLists) => {
+const buildGroupLists = groupLists => {
   const htmlList = document.createElement('ul');
   htmlList.className = 'btn-toggle-nav list-unstyled fw-normal pb-1 small';
 

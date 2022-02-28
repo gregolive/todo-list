@@ -98,7 +98,9 @@ const buildGroupForm = group => {
 const buildGroupName = group => {
   const text = document.createElement('p');
   text.className = 'group-info d-none'
-  text.textContent = group.name;
+  if (typeof group !== 'undefined') {
+    text.textContent = group.name;
+  }
 
   return text;
 }

@@ -82,10 +82,16 @@ const submitGroupForm = (lists = []) => {
 }
 
 const editGroupForm = e => {
-  const groupName = document.querySelector('.group-info').textContent,
-        lists = JSON.parse(localStorage.getItem(groupName)).lists;
+  const oldGroupName = document.querySelector('.group-info').textContent,
+        lists = JSON.parse(localStorage.getItem(oldGroupName)).lists,
+        newGroupName = document.getElementById('group-name').value;
 
-  removeGroup(groupName);
+  removeGroup(oldGroupName);
+  if (newGroupName !== oldGroupName && lists.length > 0) {
+    lists.forEach(list => {
+      list.group = newGroupName;
+    });
+  }
   submitGroupForm(lists);
 }
 
