@@ -12,6 +12,7 @@ An app for creating local todo lists.
 - The sidebar contains all groups and links to their list's so that the user can open a list in the main view
 - On a new browser session a default group and list are created
 - Users can delete and edit groups and lists via dropdown menus in the sidebar and main view respectively
+- Styling and Javascript for showing/hiding groups lists via Bootstrap
 
 ## Reflection
 
