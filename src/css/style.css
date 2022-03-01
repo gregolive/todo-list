@@ -27,7 +27,6 @@ nav {
   width: auto;
 }
 
-
 .btn-toggle-nav a {
   display: inline-flex;
   padding: 0.1875rem 0.5rem;
@@ -148,7 +147,7 @@ footer i {
   width: 24px;
 }
 
-/* LIST MODAL */
+/* MODALS */
 
 .modal {
   background-color: rgba(0,0,0,0.5);
@@ -190,6 +189,7 @@ footer i {
 @media screen and (max-width: 1024px) {
   .modal-content {
     width: max(80vw, 400px);
+    margin-bottom: 0;
   }
   
   .col-sm-2 {
