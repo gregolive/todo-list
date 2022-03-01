@@ -13,7 +13,7 @@ const main = list => {
         displayList = list || firstAvaliableList(groups);
 
   main.id = 'main';
-  main.className = 'd-flex flex-row';
+  main.className = 'd-flex';
   main.appendChild(sidebar(groups));
   main.appendChild(listView(displayList));
 

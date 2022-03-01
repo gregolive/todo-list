@@ -128,7 +128,7 @@ const buildNewGroupBtn = () => {
 // Completed sidebar
 const sidebar = groups => {
   const side = document.createElement('div');
-  side.className = 'sidebar flex-shrink-0 border-end p-3 bg-white';
+  side.className = 'sidebar flex-shrink-0 p-3 bg-white';
   side.appendChild(buildAllGroups(groups));
   side.appendChild(buildNewGroupBtn());
 

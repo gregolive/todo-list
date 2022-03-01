@@ -4,7 +4,7 @@ import cactus from '../img/cactus.png';
 const showList = list => {
   const container = document.createElement('div');
   
-  container.className = 'container-fluid position-relative m-5';
+  container.className = 'list-view container-fluid position-relative m-5';
   container.appendChild(buildTitle(list.title, list.priority));
   container.appendChild(buildDueDate(list.date));
   container.appendChild(buildGroup(list.group));
@@ -159,7 +159,7 @@ const dropdownButton = () => {
   button.setAttribute('role', 'button');
   button.appendChild(icon);
 
-  div.className = 'dropdown';
+  div.className = 'dropdown list-dropdown';
   div.appendChild(button);
   div.appendChild(menuLinks());
 
@@ -201,7 +201,7 @@ const noList = () => {
   img.alt = 'sad cactus';
   img.className = 'img-large mb-4';
   
-  container.className = 'container-fluid d-flex flex-column align-items-center justify-content-center m-5';
+  container.className = 'list-view container-fluid d-flex flex-column align-items-center justify-content-center m-5';
   container.appendChild(img);
   container.appendChild(heading);
 
