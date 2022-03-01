@@ -15,8 +15,8 @@ export default class List {
 
   addToGroup(name) {
     let target = JSON.parse(localStorage.getItem(name));
-    if (typeof target !== 'undefined') {
-      console.log(target.lists);
+    console.log(target);
+    if (target !== null) {
       target.lists.push(this);
       new Group(target.name, target.color, target.lists);
     } else {
